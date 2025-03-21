@@ -84,144 +84,468 @@
     <main class="code-container">
         <!-- Java File 1 -->
         <div class="code-example">
-            <div class="filename">HelloWorld.java</div>
+            <div class="filename">AbstractDemo.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}</code></pre>
+            <pre><code>import java.util.*;
+                abstract class Animal {
+                    public abstract void sound();
+                    public void eat(){
+                        System.out.println("this animal is eating");
+                    } 
+                }
+                
+                class Dog extends Animal {
+                    public void sound() {
+                        System.out.println("the dog barks");
+                    }
+                }
+                class Cat extends Animal {
+                    public void sound() {
+                        System.out.println("the Cat meows");
+                    }
+                }
+                
+                public class AbstractDemo {
+                    public static void main(String[] args) {
+                        Animal dog = new Dog();
+                        dog.sound();
+                        dog.eat();
+                        Animal Cat = new Cat();
+                        Cat.sound();
+                        Cat.eat();
+                    }
+                }</code></pre>
         </div>
 
         <!-- Java File 2 -->
         <div class="code-example">
-            <div class="filename">Calculator.java</div>
+            <div class="filename">BoundingBallsDemo.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>public class Calculator {
-    public int add(int a, int b) {
-        return a + b;
-    }
-    
-    public static void main(String[] args) {
-        Calculator calc = new Calculator();
-        System.out.println(calc.add(5, 3));
-    }
-}</code></pre>
+            <pre><code>import javax.swing.*;
+                import java.awt.*;
+                import java.util.Random;
+                
+                public class BoundingBallsDemo extends JPanel {
+                    private final int WIDTH = 800;
+                    private final int HEIGHT = 600;
+                    private final int NUM_BALLS = 5;
+                    private Ball[] balls;
+                
+                    public BoundingBallsDemo() {
+                        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+                        balls = new Ball[NUM_BALLS];
+                
+                        // Create balls with random initial positions, velocities, and colors
+                        for (int i = 0; i < NUM_BALLS; i++) {
+                            balls[i] = new Ball();
+                            Thread ballThread = new Thread(balls[i]);
+                            ballThread.start();
+                        }
+                
+                        // Handling window close event
+                        JFrame frame = new JFrame("Bouncing Balls Demo");
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.add(this);
+                        frame.pack();
+                        frame.setLocationRelativeTo(null);
+                        frame.setVisible(true);
+                
+                        // Start a timer to repaint the panel at a regular interval
+                        Timer timer = new Timer(10, e -> repaint());
+                        timer.start();
+                    }
+                
+                    // Override the paint method to draw balls
+                    @Override
+                    protected void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        for (Ball ball : balls) {
+                            g.setColor(ball.getColor());
+                            g.fillOval(ball.getX(), ball.getY(), Ball.DIAMETER, Ball.DIAMETER);
+                        }
+                    }
+                
+                    // Ball class representing each bouncing ball
+                    class Ball implements Runnable {
+                        static final int DIAMETER = 30;
+                        private int x, y, dx, dy;
+                        private final Color color;
+                        private final Random rand = new Random();
+                
+                        public Ball() {
+                            this.x = rand.nextInt(WIDTH - DIAMETER);
+                            this.y = rand.nextInt(HEIGHT - DIAMETER);
+                            this.dx = rand.nextInt(5) + 1; // Random horizontal speed
+                            this.dy = rand.nextInt(5) + 1; // Random vertical speed
+                            this.color = new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+                        }
+                
+                        public void run() {
+                            while (true) {
+                                move();
+                                try {
+                                    Thread.sleep(10); // Slow down the movement for smooth animation
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                
+                        // Move the ball, bouncing off walls
+                        private void move() {
+                            if (x + dx < 0 || x + dx > WIDTH - DIAMETER) {
+                                dx = -dx; // Reverse horizontal direction if hitting left or right wall
+                            }
+                            if (y + dy < 0 || y + dy > HEIGHT - DIAMETER) {
+                                dy = -dy; // Reverse vertical direction if hitting top or bottom wall
+                            }
+                            x += dx;
+                            y += dy;
+                        }
+                
+                        // Getters for ball position and color
+                        public int getX() {
+                            return x;
+                        }
+                
+                        public int getY() {
+                            return y;
+                        }
+                
+                        public Color getColor() {
+                            return color;
+                        }
+                    }
+                
+                    public static void main(String[] args) {
+                        SwingUtilities.invokeLater(BoundingBallsDemo::new);
+                    }
+                }
+                </code></pre>
         </div>
 
         <!-- Java File 3 -->
         <div class="code-example">
-            <div class="filename">Student.java</div>
+            <div class="filename">Demo.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>public class Student {
-    private String name;
-    private int rollNumber;
-    
-    public Student(String name, int rollNumber) {
-        this.name = name;
-        this.rollNumber = rollNumber;
-    }
-    
-    // Getters and setters
-}</code></pre>
+            <pre><code>import java.util.*;
+                public class Demo {
+                    public static void main(String[] args){
+                        int r,no1,no2;
+                        Scanner sc=new Scanner(System.in);
+                        try{
+                            System.out.println("Enter no1 & no2");
+                            no1=sc.nextInt();
+                            no2=sc.nextInt();
+                            r=no1/no2;
+                            System.out.println("Division="+r);
+                        }
+                        catch(ArithmeticException e){
+                            System.out.println("The Denominator can not be zero");
+                        }
+                        catch(Exception e){
+                            System.out.println("Please enter integer value");
+                        }
+                    }
+                }</code></pre>
         </div>
 
         <!-- Java File 4 -->
         <div class="code-example">
-            <div class="filename">ArrayExample.java</div>
+            <div class="filename">ExceptionDemo.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>public class ArrayExample {
-    public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5};
-        for (int num : numbers) {
-            System.out.println(num);
-        }
-    }
-}</code></pre>
+            <pre><code>import java.util.*;
+                public class ExceptionDemo
+                {
+                    public static void main(String[] args){
+                        int r,no1,no2;
+                        Scanner sc=new Scanner(System.in);
+                        System.out.println("Enter no1 & no2:");
+                        no1=sc.nextInt();
+                        no2=sc.nextInt();
+                        try{
+                            r=no1/no2;
+                            System.out.println("Devesion="+r);
+                        }
+                        catch(ArithmeticException e){
+                            System.out.println("the Demoninator can not be zero");
+                        }
+                    }
+                }</code></pre>
         </div>
 
         <!-- Java File 5 -->
         <div class="code-example">
-            <div class="filename">LinkedListDemo.java</div>
+            <div class="filename">InheritanceExample.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>import java.util.LinkedList;
-
-public class LinkedListDemo {
-    public static void main(String[] args) {
-        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
-        list.add("Java");
-        list.add("Python");
-        System.out.println(list);
-    }
-}</code></pre>
+            <pre><code>class Shape {
+                public void draw() {
+                    System.out.println("Drawing a shape");
+                }
+            
+                public void area() {
+                    System.out.println("Calculating area");
+                }
+            }
+            
+            // Child class Circle
+            class Circle extends Shape {
+                private double radius;
+            
+                public Circle(double radius) {
+                    this.radius = radius;
+                }
+            
+                @Override
+                public void draw() {
+                    System.out.println("Drawing a circle");
+                }
+            
+                @Override
+                public void area() {
+                    System.out.println("Area of the circle: " + (Math.PI * radius * radius));
+                }
+            }
+            
+            // Child class Rectangle
+            class Rectangle extends Shape {
+                private double length, width;
+            
+                public Rectangle(double length, double width) {
+                    this.length = length;
+                    this.width = width;
+                }
+            
+                @Override
+                public void draw() {
+                    System.out.println("Drawing a rectangle");
+                }
+            
+                @Override
+                public void area() {
+                    System.out.println("Area of the rectangle: " + (length * width));
+                }
+            }
+            
+            public class InheritanceExample {
+                public static void main(String[] args) {
+                    Shape shape1 = new Circle(5); // Circle with radius 5
+                    Shape shape2 = new Rectangle(4, 6); // Rectangle with length 4 and width 6
+            
+                    shape1.draw();
+                    shape1.area();
+            
+                    shape2.draw();
+                    shape2.area();
+                }
+            }
+            </code></pre>
         </div>
 
         <!-- Java File 6 -->
         <div class="code-example">
-            <div class="filename">ExceptionDemo.java</div>
+            <div class="filename">InterfaceDemo.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>public class ExceptionDemo {
-    public static void main(String[] args) {
-        try {
-            int result = 10 / 0;
-        } catch (ArithmeticException e) {
-            System.out.println("Cannot divide by zero!");
-        }
-    }
-}</code></pre>
+            <pre><code>import java.util.Scanner;
+
+                interface Area {
+                    void area();
+                }
+                
+                class Rectangle implements Area {
+                    private double l, b, ra; 
+                    private Scanner sc;  // Use a shared Scanner instead of creating multiple instances
+                
+                    // Constructor to initialize Scanner
+                    public Rectangle(Scanner sc) {
+                        this.sc = sc;
+                    }
+                
+                    public void area() {
+                        System.out.println("Enter Length & Breadth:");
+                        l = sc.nextDouble();
+                        b = sc.nextDouble();
+                        ra = l * b;
+                        System.out.println("Area of Rectangle = " + ra);
+                    }
+                }
+                
+                class Circle implements Area {
+                    private double r, ca;
+                    private Scanner sc;  
+                
+                    // Constructor to initialize Scanner
+                    public Circle(Scanner sc) {
+                        this.sc = sc;
+                    }
+                
+                    public void area() {
+                        System.out.println("Enter Radius:");
+                        r = sc.nextDouble();
+                        ca = 3.14 * r * r;
+                        System.out.println("Area of Circle = " + ca); 
+                    }
+                }
+                
+                public class InterfaceDemo {
+                    public static void main(String[] args) {
+                        Scanner sc = new Scanner(System.in);  // Create a single Scanner instance
+                        
+                        Area O1 = new Rectangle(sc);
+                        Area O2 = new Circle(sc);
+                        
+                        O1.area();
+                        O2.area();
+                
+                        sc.close();  // Close the scanner to prevent resource leaks
+                    }   
+                }
+                </code></pre>
         </div>
 
         <!-- Java File 7 -->
         <div class="code-example">
-            <div class="filename">ThreadExample.java</div>
+            <div class="filename">MethodOver.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>public class ThreadExample extends Thread {
-    public void run() {
-        System.out.println("Thread is running");
-    }
-    
-    public static void main(String[] args) {
-        ThreadExample thread = new ThreadExample();
-        thread.start();
-    }
-}</code></pre>
+            <pre><code>
+                import java.util.Scanner;
+                public class MethodOver {
+                 // Method to add two integers
+                 public int add(int a, int b) {
+                 return a + b;
+                 }
+                 // Method to add three integers (Overloaded method)
+                 public int add(int a, int b, int c) {
+                 return a + b + c;
+                 }
+                 // Method to add two double values (Overloaded method)
+                 public double add(double a, double b) {
+                 return a + b;
+                 }
+                 // Method to add two strings (Overloaded method)
+                 public String add(String a, String b) {
+                 return a + b;
+                 }
+                 public static void main(String[] args) {
+                 Scanner sc = new Scanner(System.in);
+                 // Creating an object of the Calculator class
+                 MethodOver calc = new MethodOver();
+                 // User-defined input for integers
+                 System.out.println("Enter two integers to add:");
+                 int num1 = sc.nextInt();
+                 int num2 = sc.nextInt();
+                 System.out.println("Sum of 2 integers: " + calc.add(num1, num2));
+                 // User-defined input for three integers
+                 System.out.println("Enter three integers to add:");
+                 int num3 = sc.nextInt();
+                 int num4 = sc.nextInt();
+                 int num5 = sc.nextInt();
+                 System.out.println("Sum of 3 integers: " + calc.add(num3, num4,
+                num5));
+                 // User-defined input for doubles
+                 System.out.println("Enter two double values to add:");
+                 double num6 = sc.nextDouble();
+                 double num7 = sc.nextDouble();
+                 System.out.println("Sum of 2 doubles: " + calc.add(num6, num7));
+                 // User-defined input for strings
+                 System.out.println("Enter two strings to concatenate:");
+                 sc.nextLine(); // Consume the leftover newline
+                 String str1 = sc.nextLine();
+                 String str2 = sc.nextLine();
+                 System.out.println("Concatenation of strings: " + calc.add(str1,
+                str2));
+                 // Close the scanner
+                 sc.close();
+                 }
+                }</code></pre>
         </div>
 
         <!-- Java File 8 -->
         <div class="code-example">
-            <div class="filename">FileIO.java</div>
+            <div class="filename">StaticDemo.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>import java.io.File;
-import java.io.IOException;
-
-public class FileIO {
-    public static void main(String[] args) {
-        try {
-            File file = new File("test.txt");
-            if (file.createNewFile()) {
-                System.out.println("File created!");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
+            <pre><code>
+                import java.util.Scanner;
+                public class StaticDemo {
+                 // Static method to calculate the sum of two integers
+                 public static int add(int a, int b) {
+                 return a + b;
+                 }
+                 // Static method to calculate the product of two integers
+                 public static int multiply(int a, int b) {
+                 return a * b;
+                 }
+                 // Static method to calculate the square of an integer
+                 public static int square(int a) {
+                 return a * a;
+                 }
+                 public static void main(String[] args) {
+                 // Creating a Scanner object for user input
+                 Scanner sc = new Scanner(System.in);
+                 // Taking user input for addition
+                 System.out.println("Enter two integers to add:");
+                 int num1 = sc.nextInt();
+                 int num2 = sc.nextInt();
+                 System.out.println("Sum of " + num1 + " and " + num2 + ": " +
+                StaticDemo.add(num1, num2));
+                 // Taking user input for multiplication
+                 System.out.println("Enter two integers to multiply:");
+                 int num3 = sc.nextInt();
+                 int num4 = sc.nextInt();
+                 System.out.println("Product of " + num3 + " and " + num4 + ": " +
+                StaticDemo.multiply(num3, num4));
+                 // Taking user input for squaring a number
+                 System.out.println("Enter an integer to square:");
+                 int num5 = sc.nextInt();
+                 System.out.println("Square of " + num5 + ": " +
+                StaticDemo.square(num5));
+                 // Close the scanner
+                 sc.close();
+                 }
+                }</code></pre>
         </div>
 
         <!-- Java File 9 -->
         <div class="code-example">
-            <div class="filename">LambdaDemo.java</div>
+            <div class="filename">Default.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>import java.util.ArrayList;
-
-public class LambdaDemo {
-    public static void main(String[] args) {
-        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.forEach(n -> System.out.println(n));
-    }
-}</code></pre>
+            <pre><code>
+                import java.util.*;
+                class StudentP1
+                {
+                 String name;
+                 int age;
+                 StudentP1()
+                 {
+                 System.out.println("Default Constructor.");
+                 name="Unknown";
+                 age=0;
+                 }
+                 StudentP1(String nm,int a)
+                 {
+                 System.out.println("Overloaded Constructor.");
+                 name=nm;
+                 age=a;
+                 }
+                 StudentP1(StudentP1 s)
+                 {
+                 System.out.println("Copy Constructor.");
+                 this.name=s.name;
+                 this.age=s.age;
+                 }
+                 void show()
+                 {
+                 System.out.println("Name="+name+"\t Age="+age);
+                 }
+                 public static void main(String[] args) {
+                 StudentP1 obj1=new StudentP1();
+                 StudentP1 obj2=new StudentP1("Raaj", 18);
+                 StudentP1 obj3=new StudentP1(obj2);
+                 obj1.show();
+                 obj2.show();
+                 obj3.show();
+                 }
+                }</code></pre>
         </div>
     </main>
 
