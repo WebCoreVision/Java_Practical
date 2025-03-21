@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aman's Code Examples</title>
+    <title>Aman's Java Codes</title>
     <style>
         * {
             margin: 0;
@@ -12,103 +12,222 @@
         }
 
         nav {
-            background-color: #333;
-            padding: 1rem;
+            background-color: #2c3e50;
+            padding: 1.5rem;
             color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .nav-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .code-container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .code-example {
-            background-color: #f5f5f5;
-            border-radius: 5px;
-            margin: 1rem 0;
-            padding: 1rem;
-            font-family: monospace;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
         }
 
         .filename {
-            color: #666;
-            margin-bottom: 0.5rem;
-            font-size: 0.9em;
+            color: #e74c3c;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
         }
 
         pre {
+            background-color: #ffffff;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
             white-space: pre-wrap;
-            word-wrap: break-word;
+            tab-size: 4;
         }
 
         .copy-button {
-            float: right;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: #3498db;
             color: white;
             border: none;
-            padding: 0.3rem 0.6rem;
-            border-radius: 3px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .copy-button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-content">
-            <h1>Aman</h1>
+            <h1>Aman's Java Projects</h1>
         </div>
     </nav>
 
     <main class="code-container">
-        <!-- Example 1 -->
+        <!-- Java File 1 -->
         <div class="code-example">
-            <div class="filename">navbar.html</div>
+            <div class="filename">HelloWorld.java</div>
             <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>&lt;nav&gt;
-    &lt;div class="nav-content"&gt;
-        &lt;h1&gt;Aman&lt;/h1&gt;
-        &lt;div class="nav-links"&gt;
-            &lt;a href="#"&gt;Home&lt;/a&gt;
-            &lt;a href="#"&gt;About&lt;/a&gt;
-            &lt;a href="#"&gt;Projects&lt;/a&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;</code></pre>
-        </div>
-
-        <!-- Example 2 -->
-        <div class="code-example">
-            <div class="filename">styles.css</div>
-            <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code>.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 2rem;
+            <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
 }</code></pre>
         </div>
 
-        <!-- Add more code examples as needed -->
+        <!-- Java File 2 -->
+        <div class="code-example">
+            <div class="filename">Calculator.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+    
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.add(5, 3));
+    }
+}</code></pre>
+        </div>
+
+        <!-- Java File 3 -->
+        <div class="code-example">
+            <div class="filename">Student.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>public class Student {
+    private String name;
+    private int rollNumber;
+    
+    public Student(String name, int rollNumber) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+    }
+    
+    // Getters and setters
+}</code></pre>
+        </div>
+
+        <!-- Java File 4 -->
+        <div class="code-example">
+            <div class="filename">ArrayExample.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>public class ArrayExample {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        for (int num : numbers) {
+            System.out.println(num);
+        }
+    }
+}</code></pre>
+        </div>
+
+        <!-- Java File 5 -->
+        <div class="code-example">
+            <div class="filename">LinkedListDemo.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>import java.util.LinkedList;
+
+public class LinkedListDemo {
+    public static void main(String[] args) {
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+        list.add("Java");
+        list.add("Python");
+        System.out.println(list);
+    }
+}</code></pre>
+        </div>
+
+        <!-- Java File 6 -->
+        <div class="code-example">
+            <div class="filename">ExceptionDemo.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>public class ExceptionDemo {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero!");
+        }
+    }
+}</code></pre>
+        </div>
+
+        <!-- Java File 7 -->
+        <div class="code-example">
+            <div class="filename">ThreadExample.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>public class ThreadExample extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+    
+    public static void main(String[] args) {
+        ThreadExample thread = new ThreadExample();
+        thread.start();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Java File 8 -->
+        <div class="code-example">
+            <div class="filename">FileIO.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>import java.io.File;
+import java.io.IOException;
+
+public class FileIO {
+    public static void main(String[] args) {
+        try {
+            File file = new File("test.txt");
+            if (file.createNewFile()) {
+                System.out.println("File created!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+        </div>
+
+        <!-- Java File 9 -->
+        <div class="code-example">
+            <div class="filename">LambdaDemo.java</div>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code>import java.util.ArrayList;
+
+public class LambdaDemo {
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.forEach(n -> System.out.println(n));
+    }
+}</code></pre>
+        </div>
     </main>
 
     <script>
         function copyCode(button) {
-            const codeBlock = button.nextElementSibling;
+            const codeBlock = button.parentElement.querySelector('pre code');
             const textArea = document.createElement('textarea');
             textArea.value = codeBlock.textContent;
             document.body.appendChild(textArea);
